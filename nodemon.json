@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_ATLAS_PW": "Test123",
+        "JWT_PRIVATEKEY": "Pornhub",
+        "JWT_REFRESHPRIVATEKEY": "Xvideos"
+    }
+}
