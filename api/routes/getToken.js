@@ -22,9 +22,14 @@ router.get("/", (req, res, next) => {
             }
 
             console.log(user);
-            const accessToken = jwt.sign(user, process.env.JWT_PRIVATEKEY, {
-              expiresIn: "1m",
-            });
+            const accessToken = jwt.sign(
+              {
+                email: user.email, // payload data of user given to jwt
+                userId: user.userId,
+              },
+              process.env.JWT_PRIVATEKEY,
+              { expiresIn: "60s" } // access token expires in a minute.
+            );
 
             return res.status(200).json({
               token: accessToken,

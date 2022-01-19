@@ -7,6 +7,43 @@ const jwt = require("jsonwebtoken"); // for making token
 const User = require("../models/user");
 const RefreshToken = require("../models/refreshToken");
 
+router.get("/", (req, res, next) => {
+  User.find()
+    .exec()
+    .then((docs) => {
+      const response = {
+        count: docs.length,
+        users: docs.map((doc) => {
+          console.log(doc);
+          return {
+            _id: doc._id,
+            email: doc.email,
+            password: doc.password,
+          };
+        }),
+      };
+      res.status(200).json(response);
+    });
+});
+
+router.get("/getUserRefreshToken", (req, res, next) => {
+  RefreshToken.find()
+    .exec()
+    .then((docs) => {
+      const response = {
+        count: docs.length,
+        users: docs.map((doc) => {
+          console.log(doc);
+          return {
+            _id: doc._id,
+            refreshToken: doc.refreshTokenId,
+          };
+        }),
+      };
+      res.status(200).json(response);
+    });
+});
+
 router.post("/signUp", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -83,7 +120,7 @@ router.post("/login", (req, res, next) => {
                   userId: user[0]._id,
                 },
                 process.env.JWT_PRIVATEKEY,
-                { expiresIn: "1m" } // access token expires in a minute.
+                { expiresIn: "60s" } // access token expires in a minute.
               );
 
               const madeRefreshToken = jwt.sign(
