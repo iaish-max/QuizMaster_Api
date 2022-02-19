@@ -2,11 +2,9 @@
   "name": "quizmasterapi",
   "version": "1.0.0",
   "description": "quiz mater game api",
-  "main": "index.js",
+  "main": "server3.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "start2": "nodemon server2.js",
-    "start3": "nodemon server3.js",
+    "start": "nodemon server3.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
