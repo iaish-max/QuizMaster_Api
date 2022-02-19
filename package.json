@@ -4,8 +4,8 @@
   "description": "quiz mater game api",
   "main": "server3.js",
   "scripts": {
-    "start": "nodemon server3.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server3.js"
   },
   "keywords": [
     "node",
@@ -32,9 +32,13 @@
     "nodemailer": "^6.7.2",
     "otp-generator": "^4.0.0",
     "passport": "^0.5.2",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "16.13.2"
   }
 }
