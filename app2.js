@@ -3,6 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
+var cookieParser = require("cookie-parser");
 
 const userRoute = require("./api/routes/user");
 const getTokenRoute = require("./api/routes/getToken");
@@ -24,6 +25,7 @@ app.use(morgan("dev")); //for log the methods
 //body-parser come default in express so there is no need to install body-parser
 app.use(bodyparser.urlencoded({ extended: false })); // to make a urlencoded file in redable form so that we read it easily
 app.use(bodyparser.json()); //to make a json file in redable form so that we read it easily
+app.use(cookieParser()); //for getting cookies
 
 //for CORS error
 app.use((req, res, next) => {

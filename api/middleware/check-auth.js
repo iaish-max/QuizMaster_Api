@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const User = require("../models/user");
+const GlobalUser = require("../models/globalUser");
 
 module.exports = (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     const decode = jwt.verify(token, process.env.JWT_PRIVATEKEY);
     console.log("decode is", decode);
 
-    User.find({ email: decode.email })
+    GlobalUser.find({ email: decode.email })
       .exec()
       .then((user) => {
         console.log(user.length);

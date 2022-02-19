@@ -4,13 +4,13 @@ const router = express.Router();
 
 const Question = require("../models/question");
 const Category = require("../models/category");
+const checkAuth = require("../middleware/check-auth");
 
-router.post("/:categoryId", (req, res, next) => {
+router.post("/:categoryId", checkAuth, (req, res, next) => {
+  console.log("id through parameter is: ", req.params.categoryId);
   Category.find({ _id: req.params.categoryId })
     .exec()
     .then((result) => {
-      console.log(result);
-
       if (result.length >= 1) {
         const question = new Question({
           _id: mongoose.Types.ObjectId(),
@@ -52,6 +52,8 @@ router.post("/:categoryId", (req, res, next) => {
       });
     });
 });
+
+//route of category question
 
 router.get("/:categoryId", (req, res, next) => {
   Question.find({ categoryId: req.params.categoryId })

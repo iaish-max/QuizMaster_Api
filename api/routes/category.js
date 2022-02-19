@@ -5,14 +5,15 @@ const checkAuth = require("../middleware/check-auth");
 
 const Category = require("../models/category");
 
-router.get("/", checkAuth, (req, res, next) => {
+router.get("/", (req, res, next) => {
+  // add checkAuth
+
   Category.find()
     .exec()
     .then((docs) => {
       const response = {
         count: docs.length,
         category: docs.map((doc) => {
-          console.log(doc);
           return {
             _id: doc._id,
             categoryName: doc.categoryName,
@@ -38,8 +39,6 @@ router.post("/", (req, res, next) => {
   Category.find({ categoryName: req.body.categoryName })
     .exec()
     .then((result) => {
-      console.log(result);
-
       if (result.length >= 1) {
         res.status(409).json({
           message: "category already exist",
@@ -53,7 +52,6 @@ router.post("/", (req, res, next) => {
         category
           .save()
           .then((result) => {
-            console.log(result);
             res.status(200).json({
               message: "Category added successfully",
               createdCategory: {
@@ -86,13 +84,10 @@ router.delete("/:categoryId", (req, res, next) => {
   Category.find({ _id: req.params.categoryId })
     .exec()
     .then((result) => {
-      console.log(result);
-
       if (result.length >= 1) {
         Category.remove({ _id: req.params.categoryId })
           .exec()
           .then((result) => {
-            console.log(result);
             res.status(200).json({
               message: "Category deleted successfully",
             });
@@ -146,6 +141,28 @@ router.patch("/:categoryId", (req, res, next) => {
       }
     })
     .catch();
+});
+
+router.post("/categoryName", (req, res, next) => {
+  Category.find({ categoryName: req.body.categoryName })
+    .exec()
+    .then((result) => {
+      if (result.length >= 1) {
+        res.status(200).json({
+          message: "category found",
+          _id: result[0]._id,
+        });
+      } else {
+        res.status(409).json({
+          message: "Category not exist",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const RefreshToken = require("../models/refreshToken");
 
-router.get("/", (req, res, next) => {
+router.post("/", (req, res, next) => {
   RefreshToken.find({ refreshTokenId: req.body.refreshTokenId })
     .exec()
     .then((result) => {
@@ -28,7 +28,7 @@ router.get("/", (req, res, next) => {
                 userId: user.userId,
               },
               process.env.JWT_PRIVATEKEY,
-              { expiresIn: "60s" } // access token expires in a minute.
+              { expiresIn: "6m" } // access token expires in a minute.
             );
 
             return res.status(200).json({
