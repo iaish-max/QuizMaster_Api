@@ -57,7 +57,7 @@ app.use("/quizMaster/question", qustionRoute);
 app.use("/quizMaster/user", userRoute);
 app.use("/quizMaster/token", getTokenRoute);
 
-app.use("/cookie", cookieRoute);
+app.use("/", cookieRoute);
 
 //if the request are not go in any route
 app.use((req, res, next) => {
