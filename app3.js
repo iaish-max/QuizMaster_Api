@@ -21,7 +21,7 @@ mongoose
     }
   )
   .then(() => console.log("MongoDb Conected"))
-  .catch((err) => console.log(err)); // connect database with mongoose.
+  .catch((err) => console.log("mongoose error is: ", err)); // connect database with mongoose.
 
 //cors error
 var corsOptions = {
