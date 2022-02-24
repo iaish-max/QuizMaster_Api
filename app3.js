@@ -10,18 +10,49 @@ const qustionRoute = require("./api/routes/question");
 const cookieRoute = require("./api/routes/cookie");
 var cors = require("cors");
 
-mongoose
-  .connect(
-    "mongodb+srv://admin-aishwary:" +
-      process.env.MONGO_ATLAS_PW +
-      "@cluster0.j80mt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then(() => console.log("MongoDb Conected"))
-  .catch((err) => console.log("mongoose error is: ", err)); // connect database with mongoose.
+const password = process.env.MONGO_ATLAS_PW;
+const MONGOB_URI = `mongodb+srv://admin-aishwary:${password}@cluster0.j80mt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+
+mongoose.connect(MONGOB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+mongoose.connection.on("connected", () => {
+  console.log("Mongoose is connected");
+});
+
+// const username = "aishwary";
+// const password = "Test123";
+// const cluster = "cluster0.zka6j";
+// const dbname = "myFirstDatabase";
+
+// mongoose.connect(
+//   `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`,
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }
+// );
+
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "connection error: "));
+// db.once("open", function () {
+//   console.log("Connected successfully");
+// });
+
+// mongoose
+//   .connect(
+//     "mongodb+srv://admin-aishwary:" +
+//       process.env.MONGO_ATLAS_PW +
+//       "@cluster0.j80mt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     }
+//   )
+//   .then(() => console.log("MongoDb Conected"))
+//   .catch((err) => console.log("mongoose error is: ", err)); // connect database with mongoose.
 
 //cors error
 var corsOptions = {

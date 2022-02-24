@@ -24,7 +24,7 @@ router.get("/", (req, res, next) => {
           };
         }),
       };
-
+      console.log("response is: ", response);
       res.status(200).json(response);
     })
     .catch((err) => {

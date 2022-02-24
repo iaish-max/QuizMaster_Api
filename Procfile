@@ -1,1 +1,1 @@
-web: npm run nodemon server.js
+web: node server3.js
