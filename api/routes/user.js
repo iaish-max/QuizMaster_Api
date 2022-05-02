@@ -150,6 +150,8 @@ router.delete("/delete", (req, res, next) => {
 });
 
 router.post("/signUp", (req, res, next) => {
+  res.set("Access-Control-Allow-Origin", "*");
+
   User.find({ email: req.body.email })
     .exec()
     .then((user) => {
