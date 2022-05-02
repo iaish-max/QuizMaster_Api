@@ -12,6 +12,8 @@ router.post("/:categoryId", checkAuth, (req, res, next) => {
     .exec()
     .then((result) => {
       if (result.length >= 1) {
+        console.log("req is: ", req.body);
+
         const question = new Question({
           _id: mongoose.Types.ObjectId(),
           statement: req.body.statement,
