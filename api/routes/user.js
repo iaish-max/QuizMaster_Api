@@ -174,7 +174,7 @@ router.post("/signUp", (req, res, next) => {
         autoGenOTP.save();
 
         let transporter = nodemailer.createTransport({
-          service: "gmail",
+          service: "Outlook365",
           auth: {
             user: process.env.SENDING_EMAIL_ID, // generated ethereal user
             pass: process.env.EMAIL_PASSWORD, // generated ethereal password
@@ -182,7 +182,7 @@ router.post("/signUp", (req, res, next) => {
         });
 
         let sendingMail = {
-          from: "QuizMaster? <foo@blurdybloop.com>", // sender address
+          from: `QuizMaster ${process.env.SENDING_EMAIL_ID}`, // sender address
           to: req.body.email, // list of receivers
           subject: "Account Activation Link", // Subject line
           html: `<div><p>To Activate your Account please verify this email </p><p>Your One Time password is ${OTP}</p></div>`,
